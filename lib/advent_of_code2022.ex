@@ -3,16 +3,13 @@ defmodule AdventOfCode2022 do
   Documentation for `AdventOfCode2022`.
   """
 
-  @doc """
-  Hello world.
 
-  ## Examples
+  alias AdventOfCode2022.Calories
 
-      iex> AdventOfCode2022.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def day_01 do
+    %{
+      part_01: Calories.get_top_elf_calories("lib/files/day_01/elves_calories.txt", 1),
+      part_02: Calories.get_top_elf_calories("lib/files/day_01/elves_calories.txt", 3)
+    }
   end
 end
