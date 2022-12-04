@@ -25,7 +25,7 @@ defmodule AdventOfCode2022 do
   def day_03 do
     %{
       part_01: Rucksack.calculate("lib/files/day_03/rucksack.txt"),
-      part_02: Rucksack.calculate("lib/files/day_03/rucksack.txt")
+      part_02: Rucksack.calculate2("lib/files/day_03/rucksack.txt")
     }
   end
 end

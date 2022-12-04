@@ -20,7 +20,6 @@ defmodule AdventOfCode2022.Calories do
     File.read!(file_path)
     |> String.split("\n")
     |> get_elves_calories(0, [])
-    |> IO.inspect()
     |> Enum.sort(:desc)
     |> Enum.take(number_of_elves)
     |> Enum.sum()
