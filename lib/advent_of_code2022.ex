@@ -3,10 +3,10 @@ defmodule AdventOfCode2022 do
   Documentation for `AdventOfCode2022`.
   """
 
-
   alias AdventOfCode2022.Calories
   alias AdventOfCode2022.Yankenpon
   alias AdventOfCode2022.Rucksack
+  alias AdventOfCode2022.Pairs
 
   def day_01 do
     %{
@@ -26,6 +26,14 @@ defmodule AdventOfCode2022 do
     %{
       part_01: Rucksack.calculate("lib/files/day_03/rucksack.txt"),
       part_02: Rucksack.calculate2("lib/files/day_03/rucksack.txt")
+    }
+  end
+
+  def day_04 do
+    %{
+      part_01: Pairs.calculate("lib/files/day_04/pairs.txt"),
+      part_02: Pairs.calculate2("lib/files/day_04/pairs.txt"),
+      test: Pairs.calculate("lib/files/day_04/pairs_test.txt")
     }
   end
 end
