@@ -41,7 +41,9 @@ defmodule AdventOfCode2022 do
 
   def day_05 do
     %{
-      part_01: SupplyStacks.calculate("lib/files/day_05/stacks.txt")
+      part_01: SupplyStacks.calculate("lib/files/day_05/stacks.txt"),
+      test: SupplyStacks.calculate("lib/files/day_05/stacks_test.txt")
+
     }
   end
 

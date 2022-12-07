@@ -16,7 +16,6 @@ defmodule AdventOfCode2022.TurningTrouble do
 
   defp get_signal_by_size(list, signal_size) do
     first_n_elements = Enum.take(list, signal_size)
-    |> IO.inspect()
     case are_all_diferent?(first_n_elements) do
       true ->
         signal_size
