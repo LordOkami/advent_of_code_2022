@@ -41,8 +41,7 @@ defmodule AdventOfCode2022 do
 
   def day_05 do
     %{
-      part_01_kerlak: SupplyStacks.last_crane("lib/files/day_05/stacks.txt"),
-      part_02_kerlak: SupplyStacks.last_crane_with_9001("lib/files/day_05/stacks.txt")
+      part_01: SupplyStacks.calculate("lib/files/day_05/stacks.txt")
     }
   end
 

@@ -7,21 +7,6 @@ defmodule AdventOfCode2022.TurningTrouble do
   return true if all elements are different between all each other
   """
 
-  # first part
-  defp get_signal([a, b, c, d | rest], count)
-       when a !== b and a !== c and a !== d and b !== c and b !== d and c !== d do
-    {[a,b,c,d], count+4}
-  end
-
-  defp get_signal([head | rest], count) do
-    get_signal(rest, count + 1)
-  end
-
-  defp get_signal([], _) do
-    raise "No signal found"
-  end
-
-
   # second part but also generic
   defp are_all_diferent?(list) do
     (list
