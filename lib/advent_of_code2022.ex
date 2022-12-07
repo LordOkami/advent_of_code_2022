@@ -7,6 +7,8 @@ defmodule AdventOfCode2022 do
   alias AdventOfCode2022.Yankenpon
   alias AdventOfCode2022.Rucksack
   alias AdventOfCode2022.Pairs
+  alias AdventOfCode2022.SupplyStacks
+  alias AdventOfCode2022.TurningTrouble
 
   def day_01 do
     %{
@@ -34,6 +36,20 @@ defmodule AdventOfCode2022 do
       part_01: Pairs.calculate("lib/files/day_04/pairs.txt"),
       part_02: Pairs.calculate2("lib/files/day_04/pairs.txt"),
       test: Pairs.calculate("lib/files/day_04/pairs_test.txt")
+    }
+  end
+
+  def day_05 do
+    %{
+      part_01_kerlak: SupplyStacks.last_crane("lib/files/day_05/stacks.txt"),
+      part_02_kerlak: SupplyStacks.last_crane_with_9001("lib/files/day_05/stacks.txt")
+    }
+  end
+
+  def day_06 do
+    %{
+      part_01: TurningTrouble.calculate(File.read!("lib/files/day_06/turning.txt"), 4),
+      part_02: TurningTrouble.calculate(File.read!("lib/files/day_06/turning.txt"), 14)
     }
   end
 end
