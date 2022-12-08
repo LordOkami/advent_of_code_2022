@@ -56,7 +56,9 @@ defmodule AdventOfCode2022 do
 
   def day_07 do
     %{
-      part_01: DeviceSpace.calculate(File.read!("lib/files/day_07/terminal_output.txt"), 100_000)
+      part_01: DeviceSpace.calculate("lib/files/day_07/terminal_output.txt", 100_000),
+      test: DeviceSpace.calculate("lib/files/day_07/terminal_output_test.txt", 100_000)
+
     }
   end
 end

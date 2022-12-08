@@ -4,12 +4,13 @@ defmodule AdventOfCode2022.DeviceSpace do
   """
   def calculate(input, dir_size) do
     input
+    |> File.read!()
     |> String.split("$ ")
     |> Enum.drop(1)
     |> Enum.map(&(String.split(&1, "\n") |> Enum.filter(fn x -> x != "" end)))
     |> execute_commands([], %{})
     |> IO.inspect()
-    |> Enum.filter(fn {_, value} -> value < dir_size end)
+    |> Enum.filter(fn {_, value} -> value <= dir_size end)
     |> Enum.map(fn {key, value} -> value end)
     |> Enum.sum()
   end
