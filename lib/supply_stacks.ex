@@ -36,7 +36,7 @@ defmodule AdventOfCode2022.SupplyStacks do
       |> Enum.map(&to_letters(&1))
     end)
     |> transpose()
-    |> Enum.map(&Enum.filter(&1, fn x -> x != "" end)|> Enum.reverse())
+    |> Enum.map(&(Enum.filter(&1, fn x -> x != "" end) |> Enum.reverse()))
   end
 
   defp move(stacks, [0, _, _]), do: stacks

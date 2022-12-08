@@ -9,6 +9,7 @@ defmodule AdventOfCode2022 do
   alias AdventOfCode2022.Pairs
   alias AdventOfCode2022.SupplyStacks
   alias AdventOfCode2022.TurningTrouble
+  alias AdventOfCode2022.DeviceSpace
 
   def day_01 do
     %{
@@ -51,6 +52,12 @@ defmodule AdventOfCode2022 do
     %{
       part_01: TurningTrouble.calculate(File.read!("lib/files/day_06/turning.txt"), 4),
       part_02: TurningTrouble.calculate(File.read!("lib/files/day_06/turning.txt"), 14)
+    }
+  end
+
+  def day_07 do
+    %{
+      part_01: DeviceSpace.calculate(File.read!("lib/files/day_07/terminal_output.txt"),100000),
     }
   end
 end
