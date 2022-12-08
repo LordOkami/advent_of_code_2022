@@ -44,7 +44,6 @@ defmodule AdventOfCode2022 do
     %{
       part_01: SupplyStacks.calculate("lib/files/day_05/stacks.txt"),
       test: SupplyStacks.calculate("lib/files/day_05/stacks_test.txt")
-
     }
   end
 
@@ -57,7 +56,7 @@ defmodule AdventOfCode2022 do
 
   def day_07 do
     %{
-      part_01: DeviceSpace.calculate(File.read!("lib/files/day_07/terminal_output.txt"),100000),
+      part_01: DeviceSpace.calculate(File.read!("lib/files/day_07/terminal_output.txt"), 100_000)
     }
   end
 end

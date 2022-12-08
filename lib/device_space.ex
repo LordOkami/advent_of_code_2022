@@ -8,6 +8,7 @@ defmodule AdventOfCode2022.DeviceSpace do
     |> Enum.drop(1)
     |> Enum.map(&(String.split(&1, "\n") |> Enum.filter(fn x -> x != "" end)))
     |> execute_commands([], %{})
+    |> IO.inspect()
     |> Enum.filter(fn {_, value} -> value < dir_size end)
     |> Enum.map(fn {key, value} -> value end)
     |> Enum.sum()
@@ -44,8 +45,7 @@ defmodule AdventOfCode2022.DeviceSpace do
     dir_sizes_map =
       dir_sizes_map
       |> Enum.map(fn {key, value} ->
-        # si el key está en el breadcrumbs, entonces es un directorio que está en el path actual
-        # y por lo tanto hay que incrementar su tamaño
+        # if key is in breadcrumbs, then it's a parent dir
         if Enum.member?(breadcrumbs, key) do
           {key, value + total_size}
         else
@@ -65,12 +65,15 @@ defmodule AdventOfCode2022.DeviceSpace do
         execute_commands(rest, breadcrumbs |> Enum.drop(-1), dir_sizes_map)
 
       directory_name ->
-        dir_sizes_map =
-          dir_sizes_map
-          # vamos a suponer que no entra dos veces en el mismo directorio. sino habría que cambiar esta línea
-          |> Map.put(directory, 0)
+        # if the directory is not in the map, then it's a new directory
+        case !Map.has_key?(dir_sizes_map, directory_name) do
+          true ->
+            dir_sizes_map = Map.put(dir_sizes_map, directory_name, 0)
+            execute_commands(rest, breadcrumbs ++ [directory_name], dir_sizes_map)
 
-        execute_commands(rest, breadcrumbs ++ [directory_name], dir_sizes_map)
+          _ ->
+            execute_commands(rest, breadcrumbs ++ [directory_name], dir_sizes_map)
+        end
     end
   end
 
