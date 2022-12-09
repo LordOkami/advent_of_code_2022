@@ -28,9 +28,26 @@ defmodule AdventOfCode2022.DeviceSpace do
     end
   end
 
-  # ls
-  def execute_commands([], breadcrumbs, dir_sizes_map), do: dir_sizes_map
+  def increment_breadcrumbs_map([], dir_sizes_map, _), do: dir_sizes_map
+  def increment_breadcrumbs_map(breadcrumbs, dir_sizes_map, total_size) do
+    dir_sizes_map =
+      dir_sizes_map
+      |> Enum.map(fn {key, value} ->
+        # if key is in breadcrumbs, then it's a parent dir
+        if breadcrumbs == key do
+          {key, value + total_size}
+        else
+          {key, value}
+        end
+      end)
+      |> Map.new()
 
+      breadcrumbs = breadcrumbs |> Enum.drop(-1)
+      increment_breadcrumbs_map(breadcrumbs, dir_sizes_map, total_size)
+  end
+  # ls
+
+  def execute_commands([], breadcrumbs, dir_sizes_map), do: dir_sizes_map
   def execute_commands([["ls" | params] | rest], breadcrumbs, dir_sizes_map) do
     total_size =
       params
@@ -43,17 +60,7 @@ defmodule AdventOfCode2022.DeviceSpace do
       |> Enum.sum()
 
     # increment all the dir_sizes_map with the total_size
-    dir_sizes_map =
-      dir_sizes_map
-      |> Enum.map(fn {key, value} ->
-        # if key is in breadcrumbs, then it's a parent dir
-        if breadcrumbs == key do
-          {key, value + total_size}
-        else
-          {key, value}
-        end
-      end)
-      |> Map.new()
+    dir_sizes_map = increment_breadcrumbs_map(breadcrumbs, dir_sizes_map, total_size)
 
 
     IO.inspect(dir_sizes_map)
