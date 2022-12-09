@@ -7,7 +7,6 @@ defmodule AdventOfCode2022.DeviceSpace do
     |> File.read!()
     |> String.split("$ ")
     |> Enum.filter(fn x -> x != "" end)
-    |> IO.inspect()
     |> Enum.map(&(String.split(&1, "\n") |> Enum.filter(fn x -> x != "" end)))
     |> execute_commands([], %{})
     |> Enum.filter(fn {_, value} -> value < dir_size end)
@@ -61,9 +60,6 @@ defmodule AdventOfCode2022.DeviceSpace do
 
     # increment all the dir_sizes_map with the total_size
     dir_sizes_map = increment_breadcrumbs_map(breadcrumbs, dir_sizes_map, total_size)
-
-
-    IO.inspect(dir_sizes_map)
 
 
     execute_commands(rest, breadcrumbs, dir_sizes_map)
