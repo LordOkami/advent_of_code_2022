@@ -8,9 +8,9 @@ defmodule AdventOfCode2022.DeviceSpace do
     |> String.split("$ ")
     |> Enum.drop(1)
     |> Enum.map(&(String.split(&1, "\n") |> Enum.filter(fn x -> x != "" end)))
-    |> execute_commands([], %{})
     |> IO.inspect()
-    |> Enum.filter(fn {_, value} -> value <= dir_size end)
+    |> execute_commands([], %{})
+    |> Enum.filter(fn {_, value} -> value < dir_size end)
     |> Enum.map(fn {key, value} -> value end)
     |> Enum.sum()
   end
@@ -37,7 +37,6 @@ defmodule AdventOfCode2022.DeviceSpace do
         &(String.split(&1, " ")
           |> List.first())
       )
-      |> IO.inspect()
       |> Enum.filter(&is_file?(&1))
       |> Enum.map(&parse_int!(&1))
       |> Enum.sum()
@@ -54,33 +53,36 @@ defmodule AdventOfCode2022.DeviceSpace do
         end
       end)
       |> Map.new()
-      |> IO.inspect()
+
+    IO.inspect(dir_sizes_map)
 
     execute_commands(rest, breadcrumbs, dir_sizes_map)
   end
 
   # cd
   def execute_commands([["cd " <> directory | params] | rest], breadcrumbs, dir_sizes_map) do
+
     case directory do
       ".." ->
-        execute_commands(rest, breadcrumbs |> Enum.drop(-1), dir_sizes_map)
+        breadcrumbs = breadcrumbs |> Enum.drop(-1)
+        IO.inspect(breadcrumbs)
+        execute_commands(rest, breadcrumbs, dir_sizes_map)
 
       directory_name ->
+        # add the directory to the breadcrumbs
+        breadcrumbs = breadcrumbs ++ [directory_name]
+        IO.inspect(breadcrumbs)
         # if the directory is not in the map, then it's a new directory
         case !Map.has_key?(dir_sizes_map, directory_name) do
           true ->
             dir_sizes_map = Map.put(dir_sizes_map, directory_name, 0)
-            execute_commands(rest, breadcrumbs ++ [directory_name], dir_sizes_map)
+            execute_commands(rest, breadcrumbs, dir_sizes_map)
 
           _ ->
-            execute_commands(rest, breadcrumbs ++ [directory_name], dir_sizes_map)
+            execute_commands(rest, breadcrumbs, dir_sizes_map)
         end
     end
   end
 
-  # else
-  def execute_commands([_ | rest], breadcrumbs, dir_sizes_map) do
-    IO.puts("NOT IMPLEMENTED YET")
-    execute_commands(rest, breadcrumbs, dir_sizes_map)
-  end
+
 end
