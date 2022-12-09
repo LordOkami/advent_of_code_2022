@@ -7,8 +7,8 @@ defmodule AdventOfCode2022.DeviceSpace do
     |> File.read!()
     |> String.split("$ ")
     |> Enum.drop(1)
-    |> Enum.map(&(String.split(&1, "\n") |> Enum.filter(fn x -> x != "" end)))
     |> IO.inspect()
+    |> Enum.map(&(String.split(&1, "\n") |> Enum.filter(fn x -> x != "" end)))
     |> execute_commands([], %{})
     |> Enum.filter(fn {_, value} -> value < dir_size end)
     |> Enum.map(fn {key, value} -> value end)
@@ -54,7 +54,6 @@ defmodule AdventOfCode2022.DeviceSpace do
       end)
       |> Map.new()
 
-    IO.inspect(dir_sizes_map)
 
     execute_commands(rest, breadcrumbs, dir_sizes_map)
   end
@@ -65,13 +64,11 @@ defmodule AdventOfCode2022.DeviceSpace do
     case directory do
       ".." ->
         breadcrumbs = breadcrumbs |> Enum.drop(-1)
-        IO.inspect(breadcrumbs)
         execute_commands(rest, breadcrumbs, dir_sizes_map)
 
       directory_name ->
         # add the directory to the breadcrumbs
         breadcrumbs = breadcrumbs ++ [directory_name]
-        IO.inspect(breadcrumbs)
         # if the directory is not in the map, then it's a new directory
         case !Map.has_key?(dir_sizes_map, directory_name) do
           true ->
