@@ -6,7 +6,7 @@ defmodule AdventOfCode2022.DeviceSpace do
     input
     |> File.read!()
     |> String.split("$ ")
-    |> Enum.drop(1)
+    |> Enum.filter(fn x -> x != "" end)
     |> IO.inspect()
     |> Enum.map(&(String.split(&1, "\n") |> Enum.filter(fn x -> x != "" end)))
     |> execute_commands([], %{})
@@ -15,7 +15,6 @@ defmodule AdventOfCode2022.DeviceSpace do
     |> Enum.sum()
   end
 
-  def execute_commands([], breadcrumbs, dir_sizes_map), do: dir_sizes_map
 
   # Utils
   def is_file?(input) do
@@ -30,6 +29,8 @@ defmodule AdventOfCode2022.DeviceSpace do
   end
 
   # ls
+  def execute_commands([], breadcrumbs, dir_sizes_map), do: dir_sizes_map
+
   def execute_commands([["ls" | params] | rest], breadcrumbs, dir_sizes_map) do
     total_size =
       params
@@ -46,13 +47,16 @@ defmodule AdventOfCode2022.DeviceSpace do
       dir_sizes_map
       |> Enum.map(fn {key, value} ->
         # if key is in breadcrumbs, then it's a parent dir
-        if Enum.member?(breadcrumbs, key) do
+        if breadcrumbs == key do
           {key, value + total_size}
         else
           {key, value}
         end
       end)
       |> Map.new()
+
+
+    IO.inspect(dir_sizes_map)
 
 
     execute_commands(rest, breadcrumbs, dir_sizes_map)
@@ -72,7 +76,7 @@ defmodule AdventOfCode2022.DeviceSpace do
         # if the directory is not in the map, then it's a new directory
         case !Map.has_key?(dir_sizes_map, directory_name) do
           true ->
-            dir_sizes_map = Map.put(dir_sizes_map, directory_name, 0)
+            dir_sizes_map = Map.put(dir_sizes_map, breadcrumbs, 0)
             execute_commands(rest, breadcrumbs, dir_sizes_map)
 
           _ ->
