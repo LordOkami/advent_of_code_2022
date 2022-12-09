@@ -15,4 +15,10 @@ defmodule AdventOfCode2022.DeviceSpaceTest do
     )
   end
 
+  test "lordokami 2" do
+    assert(
+      DeviceSpace.calculate2("lib/files/day_07/terminal_output.txt", 70_000_000, 30_000_000) == 0
+    )
+  end
+
 end

@@ -14,6 +14,21 @@ defmodule AdventOfCode2022.DeviceSpace do
     |> Enum.sum()
   end
 
+  def calculate2(input, total_space, free_space) do
+    all_dir_sizes = input
+    |> File.read!()
+    |> String.split("$ ")
+    |> Enum.filter(fn x -> x != "" end)
+    |> Enum.map(&(String.split(&1, "\n") |> Enum.filter(fn x -> x != "" end)))
+    |> execute_commands([], %{})
+    |> Enum.map(fn {key, value} -> value end)
+    |> Enum.sort()
+
+    current_space = Enum.take(all_dir_sizes, -1) |> List.first()
+    all_dir_sizes
+    |> Enum.find(fn x -> x > (free_space-(total_space - current_space)) end)
+  end
+
 
   # Utils
   def is_file?(input) do
