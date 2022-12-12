@@ -36,7 +36,6 @@ defmodule AdventOfCode2022 do
     %{
       part_01: Pairs.calculate("lib/files/day_04/pairs.txt"),
       part_02: Pairs.calculate2("lib/files/day_04/pairs.txt"),
-      test: Pairs.calculate("lib/files/day_04/pairs_test.txt")
     }
   end
 
@@ -56,7 +55,16 @@ defmodule AdventOfCode2022 do
 
   def day_07 do
     %{
-      part_01: DeviceSpace.calculate("lib/files/day_07/terminal_output.txt", 100_000)
+      part_01: DeviceSpace.calculate("lib/files/day_07/terminal_output.txt", 100_000),
+      part_02: DeviceSpace.calculate2("lib/files/day_07/terminal_output.txt", 70_000_000, 30_000_000)
     }
   end
+
+  def day_07 do
+    %{
+      part_01: DroneForest.calculate("lib/files/day_08/drone_forest.txt"),
+    }
+  end
+
+
 end
