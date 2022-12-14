@@ -1,5 +1,5 @@
 
-defmodule AdventOfCode2022.CleanupTest do
+defmodule AdventOfCode2022.PairsTest do
   use ExUnit.Case, async: true
   alias AdventOfCode2022.Pairs
 

@@ -15,7 +15,7 @@ defmodule AdventOfCode2022.Pairs do
     end
   end
 
-  def contains_other?(tuple) do
+  defp contains_other?(tuple) do
     [first, second] = String.split(tuple, ",")
     [first_start, first_end] = String.split(first, "-") |> Enum.map(&parse_int!(&1))
     [second_start, second_end] = String.split(second, "-") |> Enum.map(&parse_int!(&1))
@@ -24,7 +24,7 @@ defmodule AdventOfCode2022.Pairs do
       is_contained_by?(second_start, second_end, first_start, first_end)
   end
 
-  def contains_other2?(tuple) do
+  defp contains_other2?(tuple) do
     [first, second] = String.split(tuple, ",")
     [first_start, first_end] = String.split(first, "-") |> Enum.map(&parse_int!(&1))
     [second_start, second_end] = String.split(second, "-") |> Enum.map(&parse_int!(&1))
